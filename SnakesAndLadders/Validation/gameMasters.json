@@ -1,0 +1,117 @@
+{
+  "passphrase": "G-4b=8Lh7vKZQ{-@",
+  "GMs": {
+    "Format: uid": [
+      "username",
+      "station"
+    ],
+    "1465156060": [
+      "CoffeeCheetosChicken",
+      1
+    ],
+    "1704338568": [
+      "yaoqifang",
+      3
+    ]
+  },
+  "Games": {
+    "Comment": "This all can be ignored for now",
+    "Game 1": {
+      "name": "AEIOU Game",
+      "location": "Dining Hall",
+      "inPlay": true,
+      "code": "gm1"
+    },
+    "Game 2": {
+      "name": "Mini Pac Man",
+      "location": "Dining Hall",
+      "inPlay": true,
+      "code": "gm2"
+    },
+    "Game 3": {
+      "name": "Knee Trembler",
+      "location": "Dining Hall",
+      "inPlay": true,
+      "code": "gm3"
+    },
+    "Game 4": {
+      "name": "Beach Touch",
+      "location": "Atrium",
+      "inPlay": true,
+      "code": "gm4"
+    },
+    "Game 5": {
+      "name": "Guess the Attraction",
+      "location": "SRM04",
+      "inPlay": true,
+      "code": "gm5"
+    },
+    "Game 6": {
+      "name": "Pipeline Game",
+      "location": "CLB Lvl 1",
+      "inPlay": true,
+      "code": "gm6"
+    },
+    "Game 7": {
+      "name": "Cup Stack Relay",
+      "location": "Benches outside LT4",
+      "inPlay": true,
+      "code": "gm7"
+    },
+    "Game 8": {
+      "name": "Chop Chop Game",
+      "location": "SRM01",
+      "inPlay": true,
+      "code": "gm8"
+    },
+    "Game 9": {
+      "name": "Book Charade",
+      "location": "-",
+      "inPlay": false,
+      "code": "gm9"
+    },
+    "Game 10": {
+      "name": "Hula Hoop Relay",
+      "location": "Dining Hall",
+      "inPlay": true,
+      "code": "gm10"
+    },
+    "Game 11": {
+      "name": "Choo Choo Train",
+      "location": "YIH Stage",
+      "inPlay": true,
+      "code": "gm11"
+    },
+    "Game 12": {
+      "name": "Complex Poses",
+      "location": "Block B Stairway",
+      "gameMasters": [],
+      "inPlay": true,
+      "code": "gm12"
+    },
+    "Game 13": {
+      "name": "Free Points 4 All",
+      "location": "WTF IS THIS",
+      "inPlay": false,
+      "code": "gm13"
+    },
+    "Game 14": {
+      "name": "Egg and Spoon Race",
+      "location": "CLB Main Entrance",
+      "inPlay": true,
+      "code": "gm14"
+    },
+    "Game 15": {
+      "name": "Tic Tac Toe",
+      "location": "SRM02",
+      "inPlay": true,
+      "code": "gm15"
+    },
+    "Game 16": {
+      "name": "Stay in the Shot",
+      "location": "Science Building Benches",
+      "inPlay": true,
+      "code": "gm16"
+    }
+  }
+}

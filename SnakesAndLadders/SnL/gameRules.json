@@ -1,24 +1,30 @@
 {
+  "COMMENTS READ THIS": "ALL POSITION RELATED NUMBERS ARE 0 INDEXED(-1), POINTS ARE 1 INDEXED(Normal)",
+  
   "oldBlocks": ["Manis", "Strix", "Aonyx", "Orcaella", "Rusa"],
 
   "newBlocks": ["Chelonia", "Panthera"],
+
+  "oldOGs": 3,
+
+  "newOGs": 4,
   
   "boardHeight": 6,
 
   "boardWidth": 10,
   
   "snakes": {
-      "16": 7,
-      "28": 11,
-      "39": 24,
-      "53": 50
+      "15": 6,
+      "27": 10,
+      "38": 23,
+      "52": 49
   },
 
   "ladders": {
-      "14": 26,
-      "18": 22,
-      "34": 48,
-      "43": 56
+      "13": 25,
+      "17": 21,
+      "33": 47,
+      "42": 55
   },
 
   "initialPoints": 0,
@@ -33,5 +39,7 @@
 
   "saboSteps": -3,
 
-  "oldBlockOffset": 14
+  "oldBlockOffset": 14,
+
+  "maxPointAddition": 4
 }

@@ -1,0 +1,35 @@
+{
+  "passphrase": "Yreby'#xZy~r&c?:",
+  "Houses": {
+    "Comment": "House : and number of OGs, 0 indexed",
+    "Manis": 2,
+    "Strix": 2,
+    "Aonyx": 2,
+    "Orcaella": 2,
+    "Rusa": 2,
+    "Chelonia": 3,
+    "Panthera": 3
+  },
+  "OGLs": {
+    "Format: uid": [
+      "username",
+      "House",
+      "OG"
+    ],
+    "1465156060": [
+      "CoffeeCheetosChicken",
+      "Strix",
+      2
+    ],
+    "1704338568": [
+      "yaoqifang",
+      "Orcaella",
+      0
+    ],
+    "919898463": [
+      "monjojane",
+      "Chelonia",
+      2
+    ]
+  }
+}

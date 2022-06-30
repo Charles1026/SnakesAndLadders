@@ -12,7 +12,7 @@ class Board:
     
     board = np.zeros(self.__ENDPOINT + 1)
     
-    file = open('gameRules.json')
+    file = open('./SnL/gameRules.json')
     data = json.load(file)
     
     snakes = data["snakes"]
