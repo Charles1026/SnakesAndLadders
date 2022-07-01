@@ -19,7 +19,7 @@ class Player:
     
   def incrementPoints(self, og: int, amount: int) -> bool:
     if og < 0:
-      return False
+      raise Exception("Invalid OG")
     
     try:
       if (self.__OGPoints[og] + amount < 0):
@@ -29,7 +29,7 @@ class Player:
       return True
     
     except KeyError:
-      return False
+      raise Exception("Invalid OG")
     
     
   def currPosition(self) -> int:
@@ -37,11 +37,8 @@ class Player:
     
     
   def move(self, og: int, steps: int, cost: int) -> bool:
-    if ((not self.incrementPoints(og, cost)) or (self.__BOARD.gameWon(self.__position))):
-      return False
-
-    if (self.__position + steps < 0):
+    if ((not self.incrementPoints(og, cost)) or (self.__BOARD.gameWon(self.__position)) or self.__position <= 0):
       return False
     
-    self.__position += steps
+    self.__position = max(min(self.__position + steps, self.__BOARD.getEndpoint), 0)
     return True

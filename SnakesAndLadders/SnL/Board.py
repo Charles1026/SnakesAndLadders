@@ -32,6 +32,9 @@ class Board:
     file.close
     
     
+  def getEndpoint(self) -> int:
+    return self.__ENDPOINT
+
   def gameWon(self, currPos: int) -> bool:
     return currPos >= self.__ENDPOINT
   
