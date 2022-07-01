@@ -1,9 +1,9 @@
 {
   "COMMENTS READ THIS": "ALL POSITION RELATED NUMBERS ARE 0 INDEXED(-1), POINTS ARE 1 INDEXED(Normal)",
   
-  "oldBlocks": ["Manis", "Strix", "Aonyx", "Orcaella", "Rusa"],
+  "oldBlocks": ["manis", "strix", "aonyx", "orcaella", "rusa"],
 
-  "newBlocks": ["Chelonia", "Panthera"],
+  "newBlocks": ["chelonia", "panthera"],
 
   "oldOGs": 3,
 

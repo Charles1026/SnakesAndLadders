@@ -7,8 +7,8 @@ from Renderer.renderer import Renderer
 
 class Game:
   __PLAYERS = {}
-  __OLDBLOCKS = ["Manis", "Strix", "Aonyx", "Orcaella", "Rusa"]
-  __NEWBLOCKS = ["Chelonia", "Panthera"]
+  __OLDBLOCKS = ["manis", "strix", "aonyx", "orcaella", "rusa"]
+  __NEWBLOCKS = ["chelonia", "panthera"]
   __OLDOGS = 3
   __NEWOGS = 4
   __BOARD = None

@@ -66,7 +66,7 @@ class Bot:
         
         if len(context.args) == 4 and context.args[1] == "OGL":       
             passphrase = context.args[0]
-            house = context.args[2]
+            house = context.args[2].lower()
             og = context.args[3]
             if og.isdigit():
                 ogInt = int(og) - 1
@@ -90,7 +90,7 @@ class Bot:
         if not (ogl := self.__VALIDATOR.getOGL(str(update.effective_user.id))):
             await update.message.reply_text("Not A Registered OGL")
             return 
-        house = ogl[0]
+        house = ogl[0].lower()
         og = ogl[1]
         
         if True:
@@ -109,7 +109,7 @@ class Bot:
         if len(context.args) != 3:
             await update.message.reply_text("Invalid Argument Number")
             return
-        house = context.args[0]
+        house = context.args[0].lower()
         og = context.args[1]
         points = context.args[2]
         
@@ -125,7 +125,8 @@ class Bot:
         
         try:
             if self.__GAME.incrementPoints(house, og, points):
-                await update.message.reply_text("Added " + str(self.__GAME.getPoints(house, og)) + " Points to " +  house + " " + str(og + 1))
+                await update.message.reply_text("Added " + str(points) + " Points to " +  house + " " + str(og + 1) 
+                        + ", Total Points: " + str(self.__GAME.getPoints(house, og)))
                 return
         except:
             traceback.print_exc()
@@ -136,7 +137,7 @@ class Bot:
         if not (ogl := self.__VALIDATOR.getOGL(str(update.effective_user.id))):
             await update.message.reply_text("Not A Registered OGL")
             return 
-        house = ogl[0]
+        house = ogl[0].lower()
         
         if True:
             await update.message.reply_text(house + " Current Position: " + str(self.__GAME.currPosition(house) + 1))
@@ -150,7 +151,7 @@ class Bot:
         if not (ogl := self.__VALIDATOR.getOGL(str(update.effective_user.id))):
             await update.message.reply_text("Not A Registered OGL")
             return 
-        house = ogl[0]
+        house = ogl[0].lower()
         og = ogl[1]
         
         msg: Message = await update.message.reply_dice()
@@ -174,7 +175,7 @@ class Bot:
         if not (ogl := self.__VALIDATOR.getOGL(str(update.effective_user.id))):
             await update.message.reply_text("Not A Registered OGL")
             return 
-        house = ogl[0]
+        house = ogl[0].lower()
         og = ogl[1]
                
         try:
@@ -196,7 +197,7 @@ class Bot:
         if not (ogl := self.__VALIDATOR.getOGL(str(update.effective_user.id))):
             await update.message.reply_text("Not A Registered OGL")
             return 
-        house = ogl[0]
+        house = ogl[0].lower()
         og = ogl[1]
         
         if len(context.args) != 1:
@@ -275,7 +276,7 @@ class Bot:
         if len(context.args) != 1:
             await update.message.reply_text("Invalid Argument Number")
             return
-        house = context.args[0]
+        house = context.args[0].lower()
 
         info: tuple = self.__GAME.adminView(house)
         await update.message.reply_text(house + " is at " + str(info[0] + 1) + " with OG Points " + str(info[1:]))
@@ -289,7 +290,7 @@ class Bot:
         if len(context.args) != 3:
             await update.message.reply_text("Invalid Argument Number")
             return
-        house = context.args[0]
+        house = context.args[0].lower()
         og = context.args[1]
         points = context.args[2]
 
@@ -318,7 +319,7 @@ class Bot:
         if len(context.args) != 2:
             await update.message.reply_text("Invalid Argument Number")
             return
-        house = context.args[0]
+        house = context.args[0].lower()
         position = context.args[1]
 
         if not position.isdigit():

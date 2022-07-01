@@ -2,13 +2,13 @@
   "passphrase": "Yreby'#xZy~r&c?:",
   "Houses": {
     "Comment": "House : and number of OGs, 0 indexed",
-    "Manis": 2,
-    "Strix": 2,
-    "Aonyx": 2,
-    "Orcaella": 2,
-    "Rusa": 2,
-    "Chelonia": 3,
-    "Panthera": 3
+    "manis": 2,
+    "strix": 2,
+    "aonyx": 2,
+    "orcaella": 2,
+    "rusa": 2,
+    "chelonia": 3,
+    "panthera": 3
   },
   "OGLs": {
     "Format: uid": [
