@@ -1,5 +1,6 @@
 { 
-  "format": {
-    "uid": ["username"]
+  "Admins": {
+    "format: uid": ["username"],
+    "1465156060": ["CoffeeCheetosChicken"]
   }
 }

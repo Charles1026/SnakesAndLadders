@@ -19,7 +19,7 @@ class Player:
     
   def incrementPoints(self, og: int, amount: int) -> bool:
     if og < 0:
-      raise Exception("Invalid OG")
+      return False
     
     try:
       if (self.__OGPoints[og] + amount < 0):
@@ -29,7 +29,7 @@ class Player:
       return True
     
     except KeyError:
-      raise Exception("Invalid OG")
+      return False
     
     
   def currPosition(self) -> int:
@@ -40,5 +40,31 @@ class Player:
     if ((not self.incrementPoints(og, cost)) or (self.__BOARD.gameWon(self.__position)) or self.__position <= 0):
       return False
     
-    self.__position = max(min(self.__position + steps, self.__BOARD.getEndpoint), 0)
+    self.__position = max(min(self.__position + steps, self.__BOARD.getEndpoint()), 0)
+    return True
+
+
+  def adminView(self) -> tuple:
+    info = [self.__position]
+    info.append(self.__OGPoints)
+    return tuple(info)
+
+
+  def adminSetPoints(self, og: int, amount: int) -> bool:
+    if og < 0 or amount < 0:
+      return False
+    
+    try:      
+      self.__OGPoints[og] = amount
+      return True
+    
+    except KeyError:
+      return False
+
+
+  def adminSetPos(self, position: int) -> bool:
+    if position < 0 or position > self.__BOARD.getEndpoint():
+      return False
+
+    self.__position = position
     return True

@@ -210,6 +210,39 @@ class Game:
     
     return 0
     
+
+  def adminView(self, house: str) -> tuple:
+    try:
+      player: Player = self.__PLAYERS[house]
+    except KeyError:
+      return None
+
+    return player.adminView()
+
+
+  def adminSetPoints(self, house: str, og: int, amount: int) -> bool:
+    try:
+      player: Player = self.__PLAYERS[house]
+    except KeyError:
+      return False
+
+    return player.adminSetPoints(og, amount)
+
+
+  def adminSetPos(self, house: str, position: int) -> bool:
+    try:
+      player: Player = self.__PLAYERS[house]
+    except KeyError:
+      return False
+
+    currPos = player.currPosition()
+    if player.adminSetPos(position):
+      newPos = position + self.specialTileHandler(house, 0)
+      self.__renderer.moveHouse(house, currPos, newPos)
+      self.__renderer.draw()
+      return True
+    return False
+
 if __name__ == '__main__':
   game = Game()
   

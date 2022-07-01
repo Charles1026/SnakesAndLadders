@@ -1,4 +1,3 @@
-import numpy as np
 import json
 
 class Board:
@@ -10,26 +9,24 @@ class Board:
   def __init__(self, height: int, width: int) -> None:
     self.__ENDPOINT = (height * width) - 1
     
-    board = np.zeros(self.__ENDPOINT + 1)
+    board = [0] * (self.__ENDPOINT + 1)
     
-    file = open('./SnL/gameRules.json')
-    data = json.load(file)
+    with open('./SnL/gameRules.json', 'r') as file:
+      data = json.load(file)
     
-    snakes = data["snakes"]
+    snakes: dict = data["snakes"]
     snakeKeys = snakes.keys()
     
     for key in snakeKeys:
        board[int(key) - 1] = snakes.get(key) - 1
        
-    ladders = data["ladders"]
+    ladders: dict = data["ladders"]
     ladderKeys = ladders.keys()
     
     for key in ladderKeys:
        board[int(key) - 1] = ladders.get(key) - 1
        
     self.__BOARD = board
-    
-    file.close
     
     
   def getEndpoint(self) -> int:

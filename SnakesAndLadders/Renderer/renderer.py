@@ -4,7 +4,7 @@ from Renderer.board import Board
 class Renderer:
   
   __pathToImages = "./assets/"
-  __houseWidth = 594
+  __houseWidth = 460
   __houseHeight = 420
   
   def __init__(self) -> None:

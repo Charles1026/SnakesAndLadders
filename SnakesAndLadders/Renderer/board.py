@@ -3,7 +3,7 @@ from Renderer.cell import Cell
 class Board:
   
   __boardImg = "../assets/board.jpg"
-  __boardWidth = 1280
+  __boardWidth = 1920
   __boardHeight = 905
   __boardRows = 6
   __boardColumns = 10

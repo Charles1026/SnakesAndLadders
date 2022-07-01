@@ -80,6 +80,18 @@ class Validator:
       traceback.print_exception()
     return None
   
+  def isAdmin(self, uid: str) -> bool:
+    try:
+      with open("./Validation/admins.json", 'r') as file:
+        data: dict = json.load(file)
+      
+      if admin := data.get("Admins").get(uid):
+        return True
+        
+    except OSError:
+      traceback.print_exception()
+    return False
+
   
     
     
