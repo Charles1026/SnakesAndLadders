@@ -206,7 +206,7 @@ class Game:
     
     currPos = target.currPosition()
     
-    if (not target.move(og, self.__SABOSTEPS, 0)):
+    if (not target.move(0, self.__SABOSTEPS, 0)):
       player.incrementPoints(og, self.__SABOCOST)
       return False
     
