@@ -37,7 +37,7 @@ class Renderer:
         resized = combined.resize((newWidth, self.__board.getCellHeight()))
         boardImg.paste(resized, (cell.cellX, cell.cellY), resized)
     boardImg.save("./renderedImg.png")
-    print("New Image Drawn")
+    #print("New Image Drawn")
       
       
 if __name__ == "__main__":

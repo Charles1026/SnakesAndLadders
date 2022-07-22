@@ -8,7 +8,7 @@ class Player:
     self.__OGPoints = [initialPoints] * OGs
     self.__BOARD = board
     
-    
+
   def getPoints(self, og: int) -> int:
       try:
         return self.__OGPoints[og]
@@ -36,8 +36,12 @@ class Player:
     return self.__position
     
     
+  def gameWon(self) -> bool:
+    return self.__BOARD.gameWon(self.__position)
+  
+    
   def move(self, og: int, steps: int, cost: int) -> bool:
-    if ((not self.incrementPoints(og, cost)) or (self.__BOARD.gameWon(self.__position)) or self.__position <= 0):
+    if ((not self.incrementPoints(og, cost)) or self.gameWon() or self.__position <= 0):
       return False
     
     self.__position = max(min(self.__position + steps, self.__BOARD.getEndpoint()), 0)
@@ -67,4 +71,9 @@ class Player:
       return False
 
     self.__position = position
+    return True
+  
+  def adminAllSet(self, points: int) -> bool:
+    for i in range(len(self.__OGPoints)):
+      self.__OGPoints[i] = points
     return True

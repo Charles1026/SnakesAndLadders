@@ -9,9 +9,9 @@ class Board:
   __boardColumns = 10
   
   __cellWidth = 115
-  __cellHeight = 122
+  __cellHeight = 108
   __firstCellX = 65
-  __firstCellY = 82
+  __firstCellY = 128
   
   def __init__(self) -> None:
     cellID = 1

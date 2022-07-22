@@ -29,6 +29,8 @@
 
   "initialPoints": 0,
 
+  "maxPoints": 4,
+
   "rollCost": 2,
 
   "moveCost": 3,

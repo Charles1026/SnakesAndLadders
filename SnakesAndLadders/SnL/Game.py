@@ -52,6 +52,9 @@ class Game:
     
     if ("initialPoints" in data):
       self.__INITIALPOINTS = data["initialPoints"]
+      
+    if ("maxPoints" in data):
+      self.__MAXPOINTS = data["maxPoints"]
     
     if ("rollCost" in data):
       self.__ROLLCOST = data["rollCost"]
@@ -102,7 +105,7 @@ class Game:
   
     
   def incrementPoints(self, house: str, og: int, amount: int) -> bool:
-    if amount < 0 or amount > self.__MAXPOINTADDITION:
+    if amount < 0 or amount > self.__MAXPOINTADDITION or self.maxPoints(house, og):
       return False
     
     try:
@@ -110,7 +113,10 @@ class Game:
     except KeyError:
       return False
     
-    return player.incrementPoints(og, amount)
+    currPoints = self.getPoints(house, og)
+    finalAmount = min(amount, self.__MAXPOINTS - currPoints)
+    
+    return player.incrementPoints(og, finalAmount)
 
   
   def getPoints(self, house: str, og: int) -> int:
@@ -122,6 +128,18 @@ class Game:
     return player.getPoints(og)
   
   
+  def maxPoints(self, house: str, og: int) -> int:
+    points = self.getPoints(house, og)
+    if points == -1:
+      return -1
+    if points >= self.__MAXPOINTS:
+      return 1
+    return 0
+  
+  def maxAddition(self, points: int) -> bool:
+    return points > self.__MAXPOINTADDITION
+    
+  
   def currPosition(self, house: str) -> int:
     try:
       player: Player = self.__PLAYERS[house]
@@ -129,6 +147,14 @@ class Game:
       return False
     
     return player.currPosition()
+  
+  def gameWon(self, house: str) -> bool:
+    try:
+      player: Player = self.__PLAYERS[house]
+    except KeyError:
+      return False
+    
+    return player.gameWon()
   
   
   def roll(self, house: str, og: int, steps: int) -> bool:
@@ -242,6 +268,13 @@ class Game:
       self.__renderer.draw()
       return True
     return False
+
+
+  def adminAllSet(self, points: int) -> bool:
+    for player in self.__PLAYERS:
+      if not self.__PLAYERS[player].adminAllSet(points):
+        return False
+    return True
 
 if __name__ == '__main__':
   game = Game()
