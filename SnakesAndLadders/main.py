@@ -1,5 +1,6 @@
 ## Imports
 
+from datetime import datetime
 import logging
 import traceback
 
@@ -28,13 +29,6 @@ from telegram.ext import (
 from SnL.Game import Game
 from Validation.Validator import Validator
 
-## Enable Logging
-
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
-
-logger = logging.getLogger(__name__)
-
 
 class Bot:
 
@@ -47,6 +41,8 @@ class Bot:
        self.__imageLink = None
        self.__VALIDATOR = Validator()
        self.__registering = False
+       logging.basicConfig(filename="./logs/" + datetime.now().strftime("%Y%m%d%H%M%S") + ".txt", 
+                level=logging.INFO, format="%(asctime)s %(levelname)s %(funcName)s %(message)s", filemode="w")
        
     async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if update.message == None and update.edited_message != None:
@@ -113,7 +109,7 @@ class Bot:
             if og.isdigit():
                 ogInt = int(og) - 1
                 if self.__VALIDATOR.regOGL(passphrase, str(uid), uname, house, ogInt):
-                    await update.message.reply_text("Successfully Registered as " + house + " " + og 
+                    await update.message.reply_text("Successfully Registered as " + house.capitalize() + " " + og 
                             + " OGL, /help to view your new commands.\n****IMPT DO NOT SHARE THE PASSPHRASE WITH ANYONE ELSE****")
                     return
         
@@ -142,7 +138,7 @@ class Bot:
         og = ogl[1]
         
         if True:
-            await update.message.reply_text(house + " " + str(og + 1) + " Points: " + str(self.__GAME.getPoints(house, og)))
+            await update.message.reply_text(house.capitalize() + " " + str(og + 1) + " Points: " + str(self.__GAME.getPoints(house, og)))
             
     
     async def addPoints(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -177,12 +173,13 @@ class Bot:
         
         try:
             if self.__GAME.maxAddition(points) or points < 0:
-                await update.message.reply_text("Points added can only be from 0 to 4")
+                await update.message.reply_text("Points added can only be from 0 to 2")
                 return
             
             if self.__GAME.incrementPoints(house, og, points):
-                await update.message.reply_text("Added " + str(points) + " Points to " +  house + " " + str(og + 1) 
-                        + ", Total Points: " + str(self.__GAME.getPoints(house, og)))
+                reply: str = "Added " + str(points) + " Points to " +  house.capitalize() + " " + str(og + 1) + ", Total Points: " + str(self.__GAME.getPoints(house, og))
+                logging.info(reply)
+                await update.message.reply_text(reply)
                 return
         except:
             traceback.print_exc()
@@ -200,7 +197,7 @@ class Bot:
         house = ogl[0].lower()
         
         if True:
-            await update.message.reply_text(house + " Current Position: " + str(self.__GAME.currPosition(house) + 1))
+            await update.message.reply_text(house.capitalize() + " Current Position: " + str(self.__GAME.currPosition(house) + 1))
 
     
     async def roll(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -227,8 +224,9 @@ class Bot:
             
             if self.__GAME.roll(house, og, dice):
                 self.__imageUpdated = False
-                await update.message.reply_text(house + " " + str(og + 1) + " Rolls, Your New Position: " + str(self.__GAME.currPosition(house) + 1)
-                        + " Points: " + str(self.__GAME.getPoints(house, og)))
+                reply: str = house.capitalize() + " " + str(og + 1) + " Rolls: " + str(dice) + ",\nYour New Position: " + str(self.__GAME.currPosition(house) + 1) + ",\nYour Remaining Points: " + str(self.__GAME.getPoints(house, og))
+                logging.info(reply)
+                await update.message.reply_text(reply)
                 return
         except:
             traceback.print_exc()
@@ -257,8 +255,9 @@ class Bot:
             
             if self.__GAME.move(house, og):
                 self.__imageUpdated = False
-                await update.message.reply_text(house + " " + str(og + 1) + " Moved, Your New Position: " + str(self.__GAME.currPosition(house) + 1)
-                        + " Points: " + str(self.__GAME.getPoints(house, og)))
+                reply: str = house.capitalize() + " " + str(og + 1) + " Moved,\nYour New Position: " + str(self.__GAME.currPosition(house) + 1) + ",\nYour Remaining Points: " + str(self.__GAME.getPoints(house, og))
+                logging.info(reply)
+                await update.message.reply_text(reply)
                 return
                 
         except:
@@ -299,8 +298,9 @@ class Bot:
         
         if self.__GAME.sabo(house, target, og):
             self.__imageUpdated = False
-            await update.message.reply_text(target + " Sabotaged to Position: " + str(self.__GAME.currPosition(target) + 1) + ", "
-                    + " Your Remaining Points: " + str(self.__GAME.getPoints(house, og)))
+            reply: str = target.capitalize() + " Sabotaged to Position: " + str(self.__GAME.currPosition(target) + 1) + ",\nYour Remaining Points: " + str(self.__GAME.getPoints(house, og))
+            logging.info(reply)
+            await update.message.reply_text(reply)
         
         else:
             await update.message.reply_text("Invalid Sabotage, Check if you have enough points.")
@@ -400,7 +400,14 @@ class Bot:
         house = context.args[0].lower()
 
         info: tuple = self.__GAME.adminView(house)
-        await update.message.reply_text(house + " is at " + str(info[0] + 1) + " with OG Points " + str(info[1:]))
+        house = house.capitalize()
+        ogs: list =  info[1]
+        print(ogs)
+        accumOGs: str = ""
+        for i in range(len(ogs)):
+            accumOGs += "\n" + house + " " + str(i + 1) + ": " + str(ogs[i])
+        
+        await update.message.reply_text(house + " is at position " + str(info[0] + 1) + " with OG Points:" + accumOGs)
 
 
     async def adminSetPoints(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -430,7 +437,9 @@ class Bot:
         points = int(points)
 
         if self.__GAME.adminSetPoints(house, og, points):
-            await update.message.reply_text(house + " " + str(og + 1) + " has been set to " + str(points) + " points")
+            reply: str = house.capitalize() + " " + str(og + 1) + " has been set to " + str(points) + " points"
+            logging.info(reply)
+            await update.message.reply_text(reply)
             return
 
         await update.message.reply_text("Invalid Points Setting")
@@ -448,7 +457,9 @@ class Bot:
         points = int(points)
 
         if self.__GAME.adminAllSet(points):
-            await update.message.reply_text("All OGs set to " + str(points) + " points")
+            reply: str = "All OGs set to " + str(points) + " points"
+            logging.info(reply)
+            await update.message.reply_text(reply)
             return
 
         await update.message.reply_text("Invalid Points Setting")
@@ -475,13 +486,19 @@ class Bot:
 
         if self.__GAME.adminSetPos(house, position):
             self.__imageUpdated = False
-            await update.message.reply_text(house + " has been set to position " + str(position + 1))
+            reply: str = house.capitalize() + " has been set to position " + str(position + 1)
+            logging.info(reply)
+            await update.message.reply_text(reply)
             return
 
         await update.message.reply_text("Invalid Position Setting")
 
 
     async def kingbob(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+        if update.message == None and update.edited_message != None:
+            await update.edited_message.reply_text("Edited Messages Not Supported")
+            return
+        
         await update.message.reply_html("https://www.youtube.com/watch?v=TjAg-8qqR3g&ab_channel=RottenTomatoesFamily")
         return
     
@@ -507,10 +524,13 @@ class Bot:
        app.add_handler(CommandHandler("adminallset", self.adminAllSet))
        app.add_handler(CommandHandler("kingbob", self.kingbob))
        
-       
        app.run_polling()
   
+
+    def recordGameState(self):
+        self.__GAME.recordGameState()
 
 if __name__ == "__main__":
   bot = Bot()
   bot.main()
+  bot.recordGameState()

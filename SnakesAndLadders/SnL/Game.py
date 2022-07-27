@@ -31,7 +31,7 @@ class Game:
       "34": 48,
       "43": 56
   }
-  __MAXPOINTADDITION = 4
+  __MAXPOINTADDITION = 2
   
   
   def __init__(self) -> None:    
@@ -275,6 +275,13 @@ class Game:
       if not self.__PLAYERS[player].adminAllSet(points):
         return False
     return True
+  
+  def recordGameState(self) -> bool:
+    houseData = {}
+    for player in self.__PLAYERS:
+      houseData[player] = self.__PLAYERS[player].adminView()
+    with open("./logs/gameState.json", 'w') as file:
+      json.dump(houseData, file, indent=2)
 
 if __name__ == '__main__':
   game = Game()

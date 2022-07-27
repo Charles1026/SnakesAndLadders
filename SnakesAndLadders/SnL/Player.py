@@ -9,6 +9,9 @@ class Player:
     self.__BOARD = board
     
 
+  def getName(self) -> str:
+    return self.__NAME
+
   def getPoints(self, og: int) -> int:
       try:
         return self.__OGPoints[og]
@@ -41,7 +44,7 @@ class Player:
   
     
   def move(self, og: int, steps: int, cost: int) -> bool:
-    if ((not self.incrementPoints(og, cost)) or self.gameWon() or self.__position <= 0):
+    if ((not self.incrementPoints(og, cost)) or self.gameWon() or self.__position < 0):
       return False
     
     self.__position = max(min(self.__position + steps, self.__BOARD.getEndpoint()), 0)
